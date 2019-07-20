@@ -1,0 +1,76 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #000;
+    overflow-x: hidden;
+    padding-top: 0px;
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 0px;}
+}
+
+@media screen and (max-width: 450px) {
+	.main{
+        margin-left: 40%; 
+    }
+    .login-form{
+        margin-top: 25%;
+        width: 500%;
+    }
+    .sidenav{
+        width: 36%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 36%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 25%;
+        width: 100%;
+    }
+
+}
+
+
+.login-main-text{
+    margin-top: 25%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 400;
+}
