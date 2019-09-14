@@ -107,6 +107,7 @@ var VehiculosJS = {
 			marca: $("#marca").val(),
 			modelo: $("#modelo").val(),
 			matricula: $("#matricula").val(),
+			color: $("#color").val(),
 			anio: $("#anio").val()	
 		};
 		
@@ -176,6 +177,7 @@ var VehiculosJS = {
 	  	  		  $("#marca").val(obj.modelo.marca);
 	  			  $("#modelo").val(obj.modelo.modelo);
 	  			  $("#matricula").val(obj.modelo.matricula);
+	  			  $("#color").val(obj.modelo.color);
 	  			  $("#anio").val(obj.modelo.anio);	  			  
   	        
   	          }
@@ -204,6 +206,7 @@ var VehiculosJS = {
 			marca: $("#marca").val(),
 			modelo: $("#modelo").val(),
 			matricula: $("#matricula").val(),
+			color: $("#color").val(),
 			anio: $("#anio").val()	
 		};
 		
@@ -224,6 +227,11 @@ var VehiculosJS = {
 		if( objValidacion.matricula == '' ){
 			coma = empty ? "" : ",";
 			mensaje = mensaje + coma + "Matricula";	
+			empty = false;
+		}
+		if( objValidacion.color == '' ){
+			coma = empty ? "" : ",";
+			mensaje = mensaje + coma + "Color";	
 			empty = false;
 		}
 		if( objValidacion.anio == '' ){
@@ -247,6 +255,7 @@ var VehiculosJS = {
   		  $("#marca").val("");
 		  $("#modelo").val("");
 		  $("#matricula").val("");
+		  $("#color").val("");
 		  $("#anio").val("");
 		  
 		  

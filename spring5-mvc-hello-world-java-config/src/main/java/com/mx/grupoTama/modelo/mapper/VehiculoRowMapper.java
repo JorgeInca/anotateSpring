@@ -16,7 +16,7 @@ public class VehiculoRowMapper implements RowMapper<Vehiculo> {
 		vehiculo.setDescripcion(rs.getString("DESCRIPCION"));
 		vehiculo.setMarca(rs.getString("MARCA"));
 		vehiculo.setModelo(rs.getString("MODELO"));
-		vehiculo.setColor(rs.getString("MODELO"));
+		vehiculo.setColor(rs.getString("COLOR"));
 		vehiculo.setMatricula(rs.getString("MATRICULA"));
 		vehiculo.setAnio(rs.getInt("ANIO"));
 		

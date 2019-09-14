@@ -48,8 +48,8 @@ public class VehiculosDAOImpl extends BasicDAO implements VehiculosDAO{
 		parameters.put("descripcion", vehiculo.getDescripcion());
 		parameters.put("marca", vehiculo.getMarca());
 		parameters.put("modelo", vehiculo.getModelo());
-		parameters.put("color", vehiculo.getColor());
 		parameters.put("matricula", vehiculo.getMatricula());
+		parameters.put("color", vehiculo.getColor());
 		parameters.put("anio", vehiculo.getAnio());
 		
 		getNamedJdbcTemplate().update(sql,parameters);
@@ -68,8 +68,8 @@ public class VehiculosDAOImpl extends BasicDAO implements VehiculosDAO{
 		parameters.put("descripcion", vehiculo.getDescripcion());
 		parameters.put("marca", vehiculo.getMarca());
 		parameters.put("modelo", vehiculo.getModelo());
-		parameters.put("color", vehiculo.getColor());
 		parameters.put("matricula", vehiculo.getMatricula());
+		parameters.put("color", vehiculo.getColor());
 		parameters.put("anio", vehiculo.getAnio());
 		parameters.put("idVehiculo", vehiculo.getIdVehiculo());
 		

@@ -46,6 +46,14 @@
 		</div>
 		<div class="row" >
 	    	<div class="col-md-4 form-group" >
+		      <label class="control-label col-sm-2" for="pwd">Color:</label>
+		    </div>
+		    <div class="col-md-6 col-md-offset-2 form-group">          
+		       <input type="text" class="form-control" id="color" name="color" maxlength="140">
+		    </div>
+		</div>
+		<div class="row" >
+	    	<div class="col-md-4 form-group" >
 		      <label class="control-label col-sm-2" for="pwd">Año:</label>
 		    </div>
 		    <div class="col-md-6 col-md-offset-2 form-group">          
