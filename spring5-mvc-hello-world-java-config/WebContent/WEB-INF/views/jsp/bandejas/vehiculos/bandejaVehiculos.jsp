@@ -56,7 +56,7 @@
 	&nbsp;
 	</div>
 	<div class="row" id="tableBandejaGeneral">
-		<div class="col col-md-8 offset-md-2" id="tableBandejaGeneral">
+		<div class="col col-md-10 offset-md-1" id="tableBandejaGeneral">
 			<div class="table-responsive">
 				<table id="tableVehiculos"
 					class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed"
@@ -69,9 +69,10 @@
 							<th>MATRICULA</th>
 							<th>COLOR</th>							
 							<th>AÑO</th>
+							<th>SERIE</th> 
 							<th>DETALLE</th>
 							<th>EDITAR</th>
-							<th>BORRAR</th> 
+							<th>BORRAR</th>							
 						</tr>
 					</thead>
 					<tbody>
@@ -83,6 +84,7 @@
 	</div>
 	<%@ include file="modal/modalVehiculos.jsp"%>
 	<%@ include file="modal/modalEliminaVehiculos.jsp"%>
+	<%@ include file="modal/modalDetalleVehiculos.jsp"%>
 	<jsp:include page="/WEB-INF/views/jsp/footer.jsp" />
 </body>
 
@@ -112,7 +114,9 @@
 			mData: "color" 
 		},{ 
 			mData: "anio" 
-		}, {
+		},{
+			mData : "serie"
+		},{
 			mData : "detalle"
 		},{
 			mData : "editar"
