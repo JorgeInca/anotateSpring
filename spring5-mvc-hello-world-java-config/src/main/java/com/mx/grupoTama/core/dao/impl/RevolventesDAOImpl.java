@@ -1,9 +1,13 @@
 package com.mx.grupoTama.core.dao.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.mx.grupoTama.config.BasicDAO;
 import com.mx.grupoTama.core.dao.RevolventesDAO;
 import com.mx.grupoTama.core.dao.querys.QuerysRevolvente;
+import com.mx.grupoTama.core.dao.tools.GeneralUtilities;
 import com.mx.grupoTama.modelo.Revolvente;
 import com.mx.grupoTama.modelo.criteria.RevolventeCriteria;
 import com.mx.grupoTama.modelo.enums.EstatusEnum;
@@ -39,10 +44,27 @@ public class RevolventesDAOImpl extends BasicDAO implements RevolventesDAO{
 			
 			if( !criteria.getFechaInicio().equals("") && !criteria.getFechaFin().equals("")){
 				
-				sql = sql + QuerysRevolvente.GET_REVOLVENTES_AND_FECHA;
-				
 				parameters.put("fechaInicio", criteria.getFechaInicio());
 				parameters.put("fechaFin", criteria.getFechaFin());
+				
+				sql = sql + QuerysRevolvente.GET_REVOLVENTES_AND_FECHA;
+				
+			}else{
+				if(criteria.isHoy()){
+					
+					DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");  
+					   
+					parameters.put("fechaInicio",  dateFormat.format( GeneralUtilities.removeTime(new Date())) );
+					parameters.put("fechaFin",    dateFormat.format(GeneralUtilities.removeTime(new Date((new Date()).getTime() + TimeUnit.DAYS.toMillis( 1 )))) );
+					
+					sql = sql + QuerysRevolvente.GET_REVOLVENTES_AND_FECHA;
+					
+				}
+			}
+			
+			if(criteria.getEsIngreso()>0){
+				sql = sql + QuerysRevolvente.GET_REVOLVENTES_AND_ES_INGRESO;
+				parameters.put("esIngreso", criteria.getEsIngreso() - 1);
 			}
 			
 			if(criteria.getIdObra()>0){

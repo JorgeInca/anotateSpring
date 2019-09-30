@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.mx.grupoTama.core.service.OperacionesService;
 import com.mx.grupoTama.core.service.RevolventesService;
+import com.mx.grupoTama.modelo.Inventario;
 import com.mx.grupoTama.modelo.Revolvente;
 
 @Controller
@@ -16,6 +18,8 @@ public class RevolventeController {
 	
 	@Autowired
 	RevolventesService revolventesService;
+	@Autowired
+	OperacionesService operacionesService;
 
 	@RequestMapping("/doGuardaRevolvente")
 	public @ResponseBody String doGuardaRevolvente(@RequestParam("revolvente") String revolventeJSON,@RequestParam("esNuevo") String esNuevo) throws Exception{
@@ -33,6 +37,34 @@ public class RevolventeController {
 			revolventesService.actualizaRevolvente(revolvente);			
 		}
 				
+		respuesta.setSuccess(true);
+		
+        String mensajeJson = gson.toJson(respuesta);
+        return mensajeJson;
+	}
+	
+	@RequestMapping("/doGuardaRevolventeInventario")
+	public @ResponseBody String doGuardaRevolventeInventario(@RequestParam("revolvente") String revolventeJSON,@RequestParam("inventario") String inventarioJSON) throws Exception{
+
+		System.out.println("MVC - doGuardaRevolvente =" + revolventeJSON);
+		
+		ResponseObjectMVC respuesta = new ResponseObjectMVC();
+		Gson gson = new Gson();
+		
+		try{
+			Inventario inventario = gson.fromJson(inventarioJSON, Inventario.class);
+			operacionesService.actualizaInventarioPorRevolvente(inventario);
+			
+		}
+		catch (Exception e){
+			respuesta.setSuccess(false);
+			String mensajeJson = gson.toJson(respuesta);
+	        return mensajeJson;
+		}
+		
+		Revolvente revolvente = gson.fromJson(revolventeJSON, Revolvente.class);
+		revolventesService.insertaRevolvente(revolvente);
+			
 		respuesta.setSuccess(true);
 		
         String mensajeJson = gson.toJson(respuesta);

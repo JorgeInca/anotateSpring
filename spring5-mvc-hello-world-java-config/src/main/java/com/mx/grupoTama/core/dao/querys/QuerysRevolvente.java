@@ -15,6 +15,8 @@ public class QuerysRevolvente{
 	
 	public static final String GET_REVOLVENTES_AND_ID_VEHICULO = "and VEHICULO_ID = :idVehiculo ";
 	
+	public static final String GET_REVOLVENTES_AND_ES_INGRESO = "and ES_INGRESO = :esIngreso ";
+	
 	public static final String ID_REVOLVENTE = " and R.REVOLVENTE_ID  = :idRevolvente ";
 	
 	public static final String INSERT_REVOLVENTES = "INSERT INTO REVOLVENTE (DESCRIPCION,ES_INGRESO,MONTO,OBRA_ID,VEHICULO_ID,CANTIDAD) "

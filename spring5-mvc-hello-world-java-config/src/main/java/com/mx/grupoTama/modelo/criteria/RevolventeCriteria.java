@@ -7,10 +7,13 @@ public class RevolventeCriteria {
 	private String fechaFin;
 	private Long idObra;
 	private Long idVehiculo;
+	private boolean hoy;
+	private Integer esIngreso; 
 	
 	public boolean isEmpty(){
 		
-		if( fechaInicio.equals("") && fechaFin.equals("") && idObra == 0 && idVehiculo == 0){
+		if( fechaInicio.equals("") && fechaFin.equals("") && idObra == 0 && idVehiculo == 0 
+				&& !hoy && esIngreso == 0){
 			return true;
 		}else{
 			return false;
@@ -42,11 +45,29 @@ public class RevolventeCriteria {
 	public void setIdVehiculo(Long idVehiculo) {
 		this.idVehiculo = idVehiculo;
 	}
+	public boolean isHoy() {
+		return hoy;
+	}
+
+	public void setHoy(boolean hoy) {
+		this.hoy = hoy;
+	}
+
+	public Integer getEsIngreso() {
+		return esIngreso;
+	}
+
+	public void setEsIngreso(Integer esIngreso) {
+		this.esIngreso = esIngreso;
+	}
+
 	@Override
 	public String toString() {
 		return "RevolventeCriteria [fechaInicio=" + fechaInicio + ", fechaFin="
 				+ fechaFin + ", idObra=" + idObra + ", idVehiculo="
-				+ idVehiculo + "]";
+				+ idVehiculo + ", hoy=" + hoy + ", esIngreso=" + esIngreso
+				+ "]";
 	}
-			
+	
+				
 }

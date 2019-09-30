@@ -171,7 +171,7 @@ public class OperacionesDAOImpl extends BasicDAO implements OperacionesDAO{
 	}
 
 	@Override
-	public Inventario getInventarioById(Integer idInventario) {
+	public Inventario getInventarioById(Long idInventario) {
 		
 		System.out.println("DAO - getInventarioById");
 		

@@ -1,21 +1,27 @@
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.mx.grupoTama.core.dao.tools.GeneralUtilities;
 
 
 public class Principal {
 	
    public static void main(String[] args) throws ParseException {
-	   Perro perritoRex1 = new Perro();
-	   Random rand = new Random();
+	 
+	   Date hoy = new Date();
+	   hoy = GeneralUtilities.removeTime(hoy);
+
+	   System.out.println(hoy);
 	   
-	   int n = rand.nextInt(3);
+	   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");  
+	   String strDate = dateFormat.format(hoy);  
 	   
-	   if( n == 3)
-		   perritoRex1.dormir();
-	   if( n == 2)
-		   perritoRex1.comer();
-	   if( n == 1)
-		   	perritoRex1.morder();
+	   System.out.println(strDate);
+
+	   
+	   
 	   
    }
    

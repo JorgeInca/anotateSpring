@@ -12,6 +12,36 @@
 
       <!-- Modal body -->
       	<div class="modal-body">
+      	<div id="agregarInventarioDiv">	
+	      	<div class="row" >
+		    	<div class="col-md-4 form-group" >
+			      <label class="control-label col-sm-2" for="checkInventario">¿Agregar a Inventario?</label>
+			    </div>
+			    <div class="col-md-6 col-md-offset-2 form-group">          
+				   <input type="checkbox" id="checkInventario" name=checkInventario class="form-control" value="0">
+			    </div>
+			</div>
+		</div>
+		<div id="muestraInventarioDiv">	
+	       <div class="row" >
+		    	<div class="col-md-4 form-group" >
+			      <label class="control-label col-sm-2" for="idInventario">Inventario:</label>
+			    </div>
+			    <div class="col-md-6 col-md-offset-2 form-group">          
+					<select name="idInventario" id="idInventario" class="form-control" onchange="">
+					  <option value="0">** [NUEVO] **</option> 
+					</select>
+			    </div>
+			</div>
+		    <div class="row" >
+		    	<div class="col-md-4 form-group" >
+		     		<label class="control-label col-sm-2" for="pwd">Precio Unitario:</label>
+		    	</div>
+		    	<div class="col-md-6 col-md-offset-2 form-group">          
+		       		<input type="text" class="form-control money" id="precioUnitario" name="precioUnitario" maxlength="140">
+		    	</div>
+			</div>
+		</div>
       	 <div class="row" >
 		    	<div class="col-md-4 form-group" >
 			      <label class="control-label col-sm-2" for="pwd">Cantidad:</label>
@@ -46,12 +76,13 @@
 		</div>
 		<div class="row" >
 	    	<div class="col-md-4 form-group" >
-		      <label class="control-label col-sm-2" for="esIngreso">Gasto:</label>
+		      <label class="control-label col-sm-2" for="esIngreso">Egreso:</label>
 		    </div>
 		    <div class="col-md-6 col-md-offset-2 form-group">          
 			   <input type="radio" id="radioGasto" name="gastoRadio" class="form-control" value="0">
 		    </div>
 		</div>
+		
 		<hr />	
 		<div id="gastosEnObrasDiv">	
 			<div class="row" >

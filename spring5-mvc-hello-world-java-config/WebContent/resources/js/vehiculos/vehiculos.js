@@ -74,6 +74,20 @@ var VehiculosJS = {
 		$('#modalVehiculo').modal('show');
 
 	},
+	editaDetalleVehiculo : function(idVehiculo) {
+
+		$("#divErrorDetalle").hide(); 
+		
+		
+		$("#titleModalDetalleVehiculo").empty().append("Editar Detalle");
+		
+		$("#idVehiculo").val(idVehiculo);
+		
+		//VehiculosJS.llenaVehiculo(idVehiculo);
+		
+		$('#modalDetalleVehiculos').modal('show');
+
+	},
 	validaEliminarVehiculo : function(idVehiculo, descripcion) {
 
 		$("#descripcionEliminarVehiculo").empty();
@@ -108,7 +122,8 @@ var VehiculosJS = {
 			modelo: $("#modelo").val(),
 			matricula: $("#matricula").val(),
 			color: $("#color").val(),
-			anio: $("#anio").val()	
+			anio: $("#anio").val(),
+			serie: $("#serie").val()
 		};
 		
     	$.ajax({
@@ -178,7 +193,8 @@ var VehiculosJS = {
 	  			  $("#modelo").val(obj.modelo.modelo);
 	  			  $("#matricula").val(obj.modelo.matricula);
 	  			  $("#color").val(obj.modelo.color);
-	  			  $("#anio").val(obj.modelo.anio);	  			  
+	  			  $("#anio").val(obj.modelo.anio);	
+	  			  $("#serie").val(obj.modelo.serie);	
   	        
   	          }
   	          else{
@@ -207,7 +223,8 @@ var VehiculosJS = {
 			modelo: $("#modelo").val(),
 			matricula: $("#matricula").val(),
 			color: $("#color").val(),
-			anio: $("#anio").val()	
+			anio: $("#anio").val(),
+			serie: $("#serie").val()
 		};
 		
 		if( objValidacion.descripcion == '' ){
@@ -238,7 +255,12 @@ var VehiculosJS = {
 			coma = empty ? "" : ",";
 			mensaje = mensaje + coma + "Año";	
 			empty = false;
-		}		
+		}
+		if( objValidacion.serie == '' ){
+			coma = empty ? "" : ",";
+			mensaje = mensaje + coma + "Serie";	
+			empty = false;
+		}
 		
 		if( empty==false ){
 			mensaje = mensaje + '</b>';
@@ -257,6 +279,7 @@ var VehiculosJS = {
 		  $("#matricula").val("");
 		  $("#color").val("");
 		  $("#anio").val("");
+		  $("#serie").val("");
 		  
 		  
   },

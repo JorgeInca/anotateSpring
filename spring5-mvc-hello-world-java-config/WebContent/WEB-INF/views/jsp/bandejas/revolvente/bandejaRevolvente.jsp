@@ -58,6 +58,24 @@
 	</div>
 	<hr />
 	<div class="row" >
+		<div class="control-label col-md-1 offset-md-1 form-group" >
+	      <label>¿Hoy?:</label>
+	    </div>
+	    <div class="col-md-2">          
+			<input type="checkbox" id="hoyCheckCriteria" name="hoyCheckCriteria" class="form-control" value="0">
+		</div>    
+	    <div class="control-label col-md-1 form-group" >
+	      <label>Tipo operación:</label>
+	    </div>
+	    <div class="col-md-2">          
+			<select name="idGastoCriteria" id="idGastoCriteria" class="form-control">
+			  <option value="0">Seleccione</option> 
+			  <option value="2">INGRESO</option> 
+			  <option value="1">GASTO</option> 
+			</select>
+	    </div>
+	</div>
+	<div class="row" >
     	<div class="control-label col-md-1 offset-md-1 form-group" >
 	      <label>Rango de fecha:</label>
 	    </div>
@@ -125,6 +143,14 @@
 				</div>
 		</div>
 	</div>
+	<p>
+	<div class="row">
+		<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+	</div>
+	<p>
+    <div class="row">
+	&nbsp;
+	</div>
 	<%@ include file="modal/modalRevolvente.jsp"%>
 	<%@ include file="modal/modalEliminaRevolvente.jsp"%>
 	<jsp:include page="/WEB-INF/views/jsp/footer.jsp" />
@@ -141,7 +167,7 @@
   <script src="${pageContext.request.contextPath}/resources/js/operaciones/operaciones.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/vehiculos/vehiculos.js"></script>
   <script src="https://coreui.io/docs/assets/js/jquery.maskedinput.min.js"></script>
-  
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   
   <script type="text/javascript">
   tablaGlobal = $('#tableRevolvente').DataTable({
@@ -164,12 +190,17 @@
 			mData: "borrar" } ]
 	});
   
+
   </script>
   
   <script>
   	BandejaGeneralJS.cargaBandejaGeneral($('#tipoBandeja').val());
+  	OperacionesJS.obtieneInventariosSelect();
   	OperacionesJS.obtieneObrasSelect();
   	VehiculosJS.obtieneVehiculosSelect();
+  	
+  //Calculating chart
+  	
   	
   	$("#divError").hide(); 
   	
@@ -189,8 +220,100 @@
   	    	$("#gastosEnVehiculosDiv").attr("hidden",false);
   	    }
   	});
-  	  	
-
+  	
+  	$("input[name=checkInventario]").change(function(){
+  		
+  	    var  esInventario = $("#checkInventario").is(":checked");
+  	
+  	    if(esInventario){  	    	
+  	    	
+  	    	$("#muestraInventarioDiv").attr("hidden",false);
+  	    	$('#inputId').prop('readonly', true);
+  	    }else{  	    	
+  	    	$("#muestraInventarioDiv").attr("hidden",true);
+  	    }
+  	    
+  	    
+  	});
+  	
+  	$("#idInventario").change(function(){
+  		
+  	    var valorInventario = $("#idInventario").val();
+  	    var cantidad = $("#cantidad").val();
+  	    var precioInventario = inventariosMap.get( parseInt(valorInventario) );
+  	    
+  	    alert(precioInventario);
+  	    
+  	    if(valorInventario == 0){  	    	
+  	    	alert("Es nuevo" + precioInventario);
+  	    	$('#precioUnitario').prop('readonly', false);
+  	    	$('#monto').prop('readonly', false);
+  	    	
+  	    	$('#monto').val('');
+  	    	$('#precioUnitario').val('');
+  	    	
+  	    }else{  	    	
+  	    	alert("Cualquier otrao");
+  	    	$('#precioUnitario').val( precioInventario );
+  	    	
+  	    	$('#precioUnitario').prop('readonly', true);
+  	    	$('#monto').val( precioInventario * cantidad );
+  	    	$('#monto').prop('readonly', true);
+  	    	
+  	    	
+  	    }
+  	});
+  	
+  	$("#cantidad").change(function(){
+  		
+  		var esNuevo = $("#tipoOperacion").val() == "guardar";
+  		
+  		if(esNuevo){
+  			var esInventario = $("#checkInventario").is(":checked");
+  			
+  			if(esInventario){
+  				
+  				var cantidad = $("#cantidad").val();
+  				var precioInventario = $('#precioUnitario').val();
+  				$('#monto').val( precioInventario * cantidad );
+  				
+  			}  				
+  		}	 		
+  	    
+  	});
+  	
+	$("#precioUnitario").change(function(){
+  		
+  		var esNuevo = $("#tipoOperacion").val() == "guardar";
+  		
+  		if(esNuevo){
+  			var esInventario = $("#checkInventario").is(":checked");
+  			
+  			if(esInventario){
+  				
+  				var cantidad = $("#cantidad").val();
+  				var precioInventario = $('#precioUnitario').val();
+  				$('#monto').val( precioInventario * cantidad );
+  				
+  			}  				
+  		}	 		
+  	    
+  	});
+	
+	$("#hoyCheckCriteria").change(function(){
+		
+		var esHoyCriteria = $("#hoyCheckCriteria").is(":checked");
+			
+			if(esHoyCriteria){
+				$("#daterange").val('');
+				$('#daterange').prop('disabled', true);			
+			}else{
+				$("#daterange").val('');
+				$('#daterange').prop('disabled', false);
+			}
+			
+		
+	});
   </script>
 
 

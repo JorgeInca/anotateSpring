@@ -10,6 +10,7 @@ public class Vehiculo {
 	private String color;
 	private String matricula;
 	private Integer anio;
+	private String serie;
 	private Integer estatus;
 	
 	public Long getIdVehiculo() {
@@ -54,6 +55,13 @@ public class Vehiculo {
 	public void setAnio(Integer anio) {
 		this.anio = anio;
 	}
+	
+	public String getSerie() {
+		return serie;
+	}
+	public void setSerie(String serie) {
+		this.serie = serie;
+	}
 	public Integer getEstatus() {
 		return estatus;
 	}
@@ -65,7 +73,7 @@ public class Vehiculo {
 		return "Vehiculo [idVehiculo=" + idVehiculo + ", descripcion="
 				+ descripcion + ", marca=" + marca + ", modelo=" + modelo
 				+ ", color=" + color + ", matricula=" + matricula + ", anio="
-				+ anio + ", estatus=" + estatus + "]";
+				+ anio + ", serie=" + serie + ", estatus=" + estatus + "]";
 	}
 	
 	

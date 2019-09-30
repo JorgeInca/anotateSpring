@@ -56,7 +56,7 @@
 	&nbsp;
 	</div>
 	<div class="row" id="tableBandejaGeneral">
-		<div class="col col-md-8 offset-md-2" id="tableBandejaGeneral">
+		<div class="col col-md-10 offset-md-1" id="tableBandejaGeneral">
 			<div class="table-responsive">
 				<table id="tableMantenimiento"
 					class="table table-striped table-bordered dt-responsive nowrap table-hover table-condensed"

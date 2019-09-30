@@ -64,6 +64,10 @@ var BandejaGeneralJS = {
 
 	},
 	llenaDatosBandejaRevolvente : function(tipoBandejaVar, modelo) {
+		
+		chartRevolventeGastos = []; 
+		chartRevolventeIngresos = []; 
+		
 		if (modelo.length > 0) {
 			modelo.forEach(function(revolvente) {
 
@@ -95,6 +99,15 @@ var BandejaGeneralJS = {
 						+ modelo.descripcion
 						+ '\');"><span style="color: white;"><i class="fas fa-trash"></i></span></button>'
 			};
+			
+			if(modelo.esIngreso){
+				chartRevolventeIngresos.push(modelo);
+			}else{
+				chartRevolventeGastos.push(modelo);
+			}
+			
+			OperacionesJS.calculaChartRevolvente();
+			
 		}
 		if (tipoBandejaVar == TipoBandejaEnum.BANJDEJA_PERSONAS_CLIENTE.idTipoBandeja) {
 
@@ -163,7 +176,8 @@ var BandejaGeneralJS = {
 				color : modelo.color,
 				matricula : modelo.matricula,
 				anio : modelo.anio,
-				detalle:  '<button  id="btnActualizar" class="btn btn-success btn-sm" onClick="javascript: VehiculosJS.editaVehiculo('
+				serie : modelo.serie,
+				detalle:  '<button  id="btnGuardar" class="btn btn-success btn-sm" onClick="javascript: VehiculosJS.editaDetalleVehiculo('
 					+ modelo.idVehiculo
 					+ ');"><span style="color: white;"><i class="fas fa-edit"></i></span></button>',
 				editar : '<button  id="btnActualizar" class="btn btn-primary btn-sm" onClick="javascript: VehiculosJS.editaVehiculo('
@@ -226,6 +240,8 @@ var BandejaGeneralJS = {
 
 		var idObraFiltro = $("#idObraFiltro").val();
 		var idVehiculoFiltro = $("#idVehiculoFiltro").val();
+		var hoy = $("#hoyCheckCriteria").is(":checked");
+		var esIngreso = $("#idGastoCriteria").val();
 
 		$("#daterange").val();
 
@@ -234,6 +250,8 @@ var BandejaGeneralJS = {
 			fechaFin : fechaFinFiltro,
 			idObra : idObraFiltro,
 			idVehiculo : idVehiculoFiltro,
+			hoy : hoy,
+			esIngreso : esIngreso
 		};
 
 		BandejaGeneralJS.buscaBandejaGeneral(

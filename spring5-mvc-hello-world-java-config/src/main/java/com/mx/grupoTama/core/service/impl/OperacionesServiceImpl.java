@@ -66,9 +66,28 @@ public class OperacionesServiceImpl implements OperacionesService {
 		System.out.println("Service - actualizaInventario");
 		dao.actualizaInventario(Inventario);
 	}
+	
+	@Override
+	public void actualizaInventarioPorRevolvente(Inventario inventario) throws Exception{
+		System.out.println("Service - actualizaInventarioPorRevolvente");
+		
+		if(inventario.getIdInventario() == 0){
+			
+			dao.insertaInventario(inventario);
+			
+		}else{
+			Inventario actual = dao.getInventarioById(inventario.getIdInventario());
+			
+			actual.setCantidad( inventario.getCantidad() + actual.getCantidad() );
+			
+			actual.setTotal( inventario.getTotal() + actual.getTotal() );
+			
+			dao.actualizaInventario(actual);
+		}
+	}
 
 	@Override
-	public Inventario getInventarioById(Integer idInventario) throws Exception{
+	public Inventario getInventarioById(Long idInventario) throws Exception{
 		System.out.println("Service - getInventarioById");
 		return dao.getInventarioById(idInventario);
 	}

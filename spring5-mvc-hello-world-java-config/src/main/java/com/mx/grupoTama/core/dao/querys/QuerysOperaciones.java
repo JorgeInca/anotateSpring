@@ -1,8 +1,6 @@
 package com.mx.grupoTama.core.dao.querys;
 
-import org.springframework.stereotype.Repository;
 
-@Repository 
 public class QuerysOperaciones{
 
 	public static final String GET_OBRAS = "SELECT O.OBRA_ID,O.NOMBRE,O.DIRECCION,CONCAT (P.NOMBRE,' ', P.APELLIDOS) AS NOMBRE_CLIENTE,P.TELEFONO,O.CLIENTE_ID,O.FECHA_INICIO FROM OBRA O INNER JOIN PERSONA P ON P.PERSONA_ID = O.CLIENTE_ID WHERE 1 = 1";

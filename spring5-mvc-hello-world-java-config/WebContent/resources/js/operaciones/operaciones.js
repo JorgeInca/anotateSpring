@@ -1,4 +1,7 @@
 var obrasMap = new Map();
+var inventariosMap = new Map();
+var chartRevolventeGastos = []; 
+var chartRevolventeIngresos = [];
 
 var OperacionesJS = {
 	nuevoRevolvente : function() {
@@ -10,6 +13,13 @@ var OperacionesJS = {
 		
 		OperacionesJS.limpiaModalRevolvente();
 		
+		$("#muestraInventarioDiv").attr("hidden",false);
+		$("#agregarInventarioDiv").attr("hidden",false);
+		
+		$("#idInventario").val(0);
+		document.getElementById("checkInventario").checked = false;
+		$('#checkInventario').change();
+		
 		$('#modalRevolvente').modal('show');
 		
 	},
@@ -17,12 +27,20 @@ var OperacionesJS = {
 		
 		$("#divError").hide(); 
 		
+		OperacionesJS.limpiaModalRevolvente();
+		
 		$("#btnModalRevolvente").empty().append("Actualizar");
 		$("#titleModalRevolvente").empty().append("Actualizar Revolvente");
 		$("#tipoOperacion").val("actualizar");
 		$("#idRevolvente").val(idRevolvente);
 		
 		OperacionesJS.llenaRevolvente(idRevolvente);
+		
+		$("#muestraInventarioDiv").attr("hidden",true);
+		$("#agregarInventarioDiv").attr("hidden",true);
+		
+		$("#idInventario").val(0);
+		document.getElementById("checkInventario").checked = false;
 		
 		$('#modalRevolvente').modal('show');
 		
@@ -65,13 +83,36 @@ var OperacionesJS = {
 				idVehiculo: $("#idVehiculo").val() == "0" ? null : $("#idVehiculo").val(),
 		};
 		
-    	$.ajax({
-    		method : "POST",
-    		url : "doGuardaRevolvente",
-    		data : {
+		var urltx = "doGuardaRevolvente" ;
+		var dataAjax = {};
+		
+		if( $("#checkInventario").is(":checked") ){ //Si va para inventario
+						
+			var objInventario = {
+					idInventario : $("#idInventario").val(),
+					cantidad : $("#cantidad").val(),
+					descripcion: $("#descripcion").val(),
+					precioUnitario: $("#precioUnitario").val(),
+					total: $("#monto").val()					
+			};
+			
+			urltx = "doGuardaRevolventeInventario" ;
+			dataAjax = {
+    			revolvente : JSON.stringify(objRevolvente),
+    			inventario : JSON.stringify(objInventario)
+    		};			
+		}else{
+			urltx = "doGuardaRevolvente" ;
+			dataAjax = {
     			esNuevo : $("#tipoOperacion").val() == "guardar" ? "1" : "0",
     			revolvente : JSON.stringify(objRevolvente)
-    		},
+    		};
+		}
+		
+    	$.ajax({
+    		method : "POST",
+    		url : urltx,
+    		data : dataAjax,
     		success : function(data) {  			 
     	          var obj=JSON.parse(data);	   
     	          if( obj.success ){
@@ -147,9 +188,8 @@ var OperacionesJS = {
     	    		  $("input[name=gastoRadio]").change();
     	    		  
     	    		  $("#idObra").val(obj.modelo.idObra);
-    	    		  $("#idVehiculo").val(obj.modelo.idVehiculo);
-    	    		  
-	        		  $("#cantidad").change();      //¿para que?   		  
+    	    		  $("#idVehiculo").val(obj.modelo.idVehiculo);    	    		  
+    	    		  $('#cliente').val( obrasMap.get(obj.modelo.idObra) );		  
     	        
     	          }
     	          else{
@@ -217,6 +257,52 @@ var OperacionesJS = {
 		return empty;
 		
     },
+    calculaChartRevolvente : function() {
+    	
+     var montoIngresos = 0;
+     var montoEgresos = 0;
+     
+     chartRevolventeIngresos.forEach(function(ingresoCHart) {
+		 montoIngresos = montoIngresos + ingresoCHart.monto;
+	  });  
+	 
+     chartRevolventeGastos.forEach(function(egresoCHart) {
+		 montoEgresos = montoEgresos + egresoCHart.monto;
+	}); 
+     
+     var total = montoIngresos + montoEgresos;
+     
+     var porcentajeIngresos = 1/(total / montoIngresos) * 100;
+     var porcentajeEgresos = 1/(total / montoEgresos) * 100;
+     
+     
+	 //alert(montoIngresos);
+	 //alert(montoEgresos);
+	  var chart = new CanvasJS.Chart("chartContainer", {
+			theme: "light2", // "light1", "light2", "dark1", "dark2"
+			exportEnabled: true,
+			animationEnabled: true,
+			title: {
+				text: new Date()
+			},
+			data: [{
+				type: "pie",
+				startAngle: 25,
+				toolTipContent: "<b>{label}</b>: {y}%",
+				showInLegend: "true",
+				legendText: "{label}",
+				indexLabelFontSize: 16,
+				indexLabel: "{label} - {y}%",
+				dataPoints: [
+					{ y: porcentajeIngresos, label: "Ingreso - Obra - Pago 23 Diciembre:" },
+					{ y: porcentajeEgresos, label: "Gastos - Tractor - Mantenimiento" }
+				]
+			}]
+		});
+	  
+		chart.render();
+    	
+    },
     obtieneObrasSelect: function() {    	
     	$.ajax({
     		method : "POST",
@@ -244,21 +330,50 @@ var OperacionesJS = {
       		});
     	
     },
+    obtieneInventariosSelect: function() {    	
+    	$.ajax({
+    		method : "POST",
+    		url : "getInventarios",
+    		data : {
+    			idInventario : '0'
+    		},
+    		success : function(data) {  			 
+    	          var obj=JSON.parse(data);	   
+    	          if( obj.success ){	
+    	        	  obj.modelo.forEach(function(inventario) {
+    	        		  $('#idInventario').append($('<option>', {value:inventario.idInventario, text:inventario.descripcion}));
+    	        		  inventariosMap.set(inventario.idInventario, inventario.precioUnitario );
+    	        	  });    	          	        	  
+    	        
+    	          }
+    	          else{
+    	        	  alert("Fallo al consultar");
+    	          }
+      		  },
+      		  error : function(e) {
+      			  console.log("ERROR: ", e);
+      		  }
+      		});
+    },
     seleccionaClientePorObra: function(obra){
     	$('#cliente').val( obrasMap.get( parseInt(obra.value) ));
     },
     seleccionaClientePorObraFiltro: function(obra){
     	$('#clienteFiltro').val( obrasMap.get( parseInt(obra.value) ));
     },
-    limpiaModalRevolvente: function(obra){
+    limpiaModalRevolvente: function(){
     	  $("#divError").hide(); 
     	
+    	  $('#precioUnitario').prop('readonly', false);
+	      $('#monto').prop('readonly', false);
+	      
 		  $("#descripcion").val("");
 		  $("#monto").val("");
 		  $("#cliente").val("");
+		  $("#precioUnitario").val("");
 		  $("#cantidad").val("1");
 		  
-		  
+		  document.getElementById("checkInventario").checked = false;
 		  document.getElementById("radioIngreso").checked = false;
 		  document.getElementById("radioGasto").checked = false;
 		  
@@ -274,6 +389,7 @@ var OperacionesJS = {
 		$("#titleModalInventario").empty().append("Nuevo Inventario");
 		$("#tipoOperacion").val("guardar");
 		$("#idInventario").val("0");
+		$('#monto').val('');
 		$("#total").val("0");
 		
 		OperacionesJS.limpiaModalInventario();

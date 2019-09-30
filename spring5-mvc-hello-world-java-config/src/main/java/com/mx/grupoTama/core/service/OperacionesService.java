@@ -17,6 +17,7 @@ public interface OperacionesService {
 	public List<Inventario> getInventarios() throws Exception;
 	public void insertaInventario(Inventario inventario) throws Exception;
 	public void actualizaInventario(Inventario inventario) throws Exception;
-	public Inventario getInventarioById(Integer idInventario) throws Exception;
+	public void actualizaInventarioPorRevolvente(Inventario inventario) throws Exception;
+	public Inventario getInventarioById(Long idInventario) throws Exception;
 	void eliminaInventario(Integer idInventario) throws Exception;
 }

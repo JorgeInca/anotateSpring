@@ -60,6 +60,14 @@
 		       <input type="text" class="form-control number" id="anio" name="anio" maxlength="140">
 		    </div>
 		</div>
+		<div class="row" >
+	    	<div class="col-md-4 form-group" >
+		      <label class="control-label col-sm-2" for="pwd">Serie:</label>
+		    </div>
+		    <div class="col-md-6 col-md-offset-2 form-group">          
+		       <input type="text" class="form-control number" id="serie" name="serie" maxlength="140">
+		    </div>
+		</div>
 		<input id="tipoOperacion" type="text"  hidden>
 		<input id="idVehiculo" type="text"  hidden>
 	   <div id="divError" class="alert alert-danger" role="alert" ></div>

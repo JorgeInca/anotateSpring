@@ -143,7 +143,7 @@ public class OperacionesController {
 	}
 	
 	@RequestMapping("/getInventarioById")
-	public @ResponseBody String getInventarioById(@RequestParam("idInventario") Integer idInventario) throws Exception{
+	public @ResponseBody String getInventarioById(@RequestParam("idInventario") Long idInventario) throws Exception{
 
 		System.out.println("MVC - getInventarioById =" + idInventario);
 		
