@@ -3,9 +3,9 @@
   <title>${nombreBandeja}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.css">
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/daterangepicker/daterangepicker.css" />
 	<link
 	href="${pageContext.request.contextPath}/resources/css/main.css"
 	rel="stylesheet" type="text/css" media="screen">
@@ -156,18 +156,18 @@
 	<jsp:include page="/WEB-INF/views/jsp/footer.jsp" />
 </body>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/jquery/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/tools/popper.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/datatable/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/tools/moment.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/daterangepicker/daterangepicker.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/general.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/js/bandejas/bandejaGeneral.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/operaciones/operaciones.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/vehiculos/vehiculos.js"></script>
-  <script src="https://coreui.io/docs/assets/js/jquery.maskedinput.min.js"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/jquery/jquery.maskedinput.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/tools/canvasjs.min.js"></script>
   
   <script type="text/javascript">
   tablaGlobal = $('#tableRevolvente').DataTable({
