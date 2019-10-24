@@ -20,7 +20,7 @@ const TipoBandejaEnum = {
 		BANDEJA_OP_RENTAS  		 		 : { idTipoBandeja : 6, descripcion : "Rentas" 				    , vistaBandeja : "bandejas/vehiculos/"						},
 		BANDEJA_OP_INVENTARIOS	 		 : { idTipoBandeja : 7, descripcion : "Inventario" 			    , vistaBandeja : "bandejas/vehiculos/"						},
 		BANJDEJA_PERSONAS_CLIENTE	 	 : { idTipoBandeja : 8, descripcion : "Clientes" 			    , vistaBandeja : "bandejas/personas/"						},
-		BANJDEJA_PERSONAS_TRABAJADORES	 : { idTipoBandeja : 9, descripcion : "Trabajadores" 			, vistaBandeja : "bandejas/personas/"						},
+		BANJDEJA_PERSONAS_TRABAJADORES	 : { idTipoBandeja : 9, descripcion : "Trabajadores" 			, vistaBandeja : "bandejas/personas/"						}
 		
 };
 
@@ -64,4 +64,24 @@ function formateaComasNumero(value){
 
 function quitaComas(value){
 	return value.toString().replace(/,/g, "");
+};
+
+function setFechaFormato(inputName){
+	
+    	$.ajax({
+    		method : "POST",
+    		url : "getFechaFormato",
+    		success : function(data) {  			 
+    	          var obj=JSON.parse(data);	   
+    	          if( obj.success )	
+    	        	$('#'+inputName+'').val(obj.modelo);   
+    	        	
+    	          else
+    	        	  alert("Fallo al consultar");
+      		 },
+      		 error : function(e) {
+      		  console.log("ERROR: ", e);
+      		},
+      	});
+
 };

@@ -440,7 +440,8 @@ camposVaciosFaltantesEmpleado: function() {
 		
 		return empty;
 		
-},limpiaModalEmpleado: function(obra){
+},
+limpiaModalEmpleado: function(obra){
   	  $("#divError").hide(); 
   	
 		  $("#nombre").val("");
@@ -453,7 +454,32 @@ camposVaciosFaltantesEmpleado: function() {
 		  $("#numeroEmpleado").val("");
 		  
 		  
-}
+},
+obtieneEmpleadosSelect: function() {    	
+	$.ajax({
+		method : "POST",
+		url : "getEmpleados",
+		data : {
+			idEmpleado : '0'
+		},
+		success : function(data) {  			 
+	          var obj=JSON.parse(data);	   
+	          if( obj.success ){	
+	        	  obj.modelo.forEach(function(empleado) {
+	        		  $('#idEmpleado').append($('<option>', {value:empleado.idPersona, text:empleado.nombre + ' ' + empleado.apellidos}));
+	        		  //inventariosMap.set(inventario.idInventario, inventario.precioUnitario );
+	        	  });    	          	        	  
+	        
+	          }
+	          else{
+	        	  alert("Fallo al consultar");
+	          }
+  		  },
+  		  error : function(e) {
+  			  console.log("ERROR: ", e);
+  		  }
+  		});
+},
 };
 
 $(function() {
@@ -472,3 +498,5 @@ $(function() {
 	      $(this).val(picker.startDate.format('DD/MM/YYYY'));
 	  });
 });
+
+

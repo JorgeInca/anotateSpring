@@ -89,9 +89,9 @@ public class PersonaController {
 	}
 	
 	@RequestMapping("/getEmpleados")
-	public @ResponseBody String getEmpleados(@RequestParam("idCliente") Integer idCliente) throws Exception{
+	public @ResponseBody String getEmpleados(@RequestParam("idEmpleado") Integer idEmpleado) throws Exception{
 
-		System.out.println("MVC - getEmpleados =" + idCliente);
+		System.out.println("MVC - getEmpleados =" + idEmpleado);
 		
 		ResponseObjectMVC respuesta = new ResponseObjectMVC();
 		Gson gson = new Gson();

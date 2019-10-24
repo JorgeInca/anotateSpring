@@ -9,6 +9,7 @@ import com.mx.grupoTama.core.dao.OperacionesDAO;
 import com.mx.grupoTama.core.service.OperacionesService;
 import com.mx.grupoTama.modelo.Inventario;
 import com.mx.grupoTama.modelo.Obra;
+import com.mx.grupoTama.modelo.Renta;
 
 @Service
 public class OperacionesServiceImpl implements OperacionesService {
@@ -95,6 +96,38 @@ public class OperacionesServiceImpl implements OperacionesService {
 	@Override
 	public void eliminaInventario(Integer idInventario) throws Exception {
 		dao.eliminaInventario(idInventario);
+		
+	}
+	
+/** Rentas*/
+	
+	@Override
+	public List<Renta> getRentas() throws Exception{
+		System.out.println("Service - getRentas");
+		return dao.getRentas();
+	}
+
+	@Override
+	public void insertaRenta(Renta Renta) throws Exception{
+		System.out.println("Service - insertaRenta");
+		dao.insertaRenta(Renta);
+	}
+
+	@Override
+	public void actualizaRenta(Renta Renta) throws Exception{
+		System.out.println("Service - actualizaRenta");
+		dao.actualizaRenta(Renta);
+	}
+	
+	@Override
+	public Renta getRentaById(Long idRenta) throws Exception{
+		System.out.println("Service - getRentaById");
+		return dao.getRentaById(idRenta);
+	}
+
+	@Override
+	public void eliminaRenta(Integer idRenta) throws Exception {
+		dao.eliminaRenta(idRenta);
 		
 	}
 

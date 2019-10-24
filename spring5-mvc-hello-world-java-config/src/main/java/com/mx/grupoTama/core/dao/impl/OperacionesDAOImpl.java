@@ -15,9 +15,11 @@ import com.mx.grupoTama.core.dao.OperacionesDAO;
 import com.mx.grupoTama.core.dao.querys.QuerysOperaciones;
 import com.mx.grupoTama.modelo.Inventario;
 import com.mx.grupoTama.modelo.Obra;
+import com.mx.grupoTama.modelo.Renta;
 import com.mx.grupoTama.modelo.enums.EstatusEnum;
 import com.mx.grupoTama.modelo.mapper.InventarioRowMapper;
 import com.mx.grupoTama.modelo.mapper.ObraRowMapper;
+import com.mx.grupoTama.modelo.mapper.RentaRowMapper;
 
 @Repository 
 public class OperacionesDAOImpl extends BasicDAO implements OperacionesDAO{
@@ -201,6 +203,102 @@ public class OperacionesDAOImpl extends BasicDAO implements OperacionesDAO{
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		
 		parameters.put("idInventario", idInventario);
+		parameters.put("idEstatus", EstatusEnum.CANCELADO.getIdEstatus());
+
+		getNamedJdbcTemplate().update(sql,parameters);
+		
+	}
+	
+	@Override
+	public List<Renta> getRentas() throws Exception{
+		
+		System.out.println("DAO - getRentas");
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("idEstatus", EstatusEnum.ACTIVO.getIdEstatus());
+		
+		String sql = "";
+		
+		if(false){
+			
+		}else{ //All
+			sql = QuerysOperaciones.GET_RENTAS;
+			sql = sql + QuerysOperaciones.GET_RENTAS_ESTATUS;
+		}
+		
+					
+		return getNamedJdbcTemplate().query(sql,parameters,new RentaRowMapper());
+	}
+	
+	@Override
+	public void insertaRenta(Renta renta) throws Exception{
+		System.out.println("DAO - insertaRenta");
+		
+		String sql = QuerysOperaciones.INSERT_RENTA;
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		
+//		parameters.put("cantidad", renta.getCantidad());
+//		parameters.put("descripcion", renta.getDescripcion());
+//		parameters.put("precioUnitario", renta.getPrecioUnitario());
+//		parameters.put("total", renta.getTotal());
+		
+		getNamedJdbcTemplate().update(sql,parameters);
+
+	}
+
+	@Override
+	public void actualizaRenta(Renta renta) throws Exception{
+		System.out.println("DAO - actualizaRenta");
+		
+		String sql = QuerysOperaciones.ACTUALIZA_RENTA;
+		sql = sql + QuerysOperaciones.ID_RENTA;
+		 
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		parameters.put("idRenta", renta.getIdRenta());
+		
+//		parameters.put("cantidad", renta.getCantidad());
+//		parameters.put("descripcion", renta.getDescripcion());
+//		parameters.put("precioUnitario", renta.getPrecioUnitario());
+//		parameters.put("total", renta.getTotal());
+		
+		getNamedJdbcTemplate().update(sql,parameters);
+		
+	}
+
+	@Override
+	public Renta getRentaById(Long idRenta) {
+		
+		System.out.println("DAO - getRentaById");
+		
+		String sql = QuerysOperaciones.GET_RENTAS;
+		sql = sql + QuerysOperaciones.ID_RENTA;
+		 
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("idRenta", idRenta);
+			
+		List<Renta> listaRentas = new ArrayList<>();
+				
+		listaRentas = getNamedJdbcTemplate().query(sql,parameters,new RentaRowMapper());
+		
+		if(listaRentas.size()>0){
+			return listaRentas.get(0);
+		}
+		return new Renta();
+	}
+	
+	@Override
+	public void eliminaRenta(Integer idRenta) throws Exception{
+		System.out.println("DAO - eliminaRenta");
+		
+		String sql = QuerysOperaciones.BAJA_RENTA;
+		sql = sql + QuerysOperaciones.ID_RENTA;
+		 
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		parameters.put("idRenta", idRenta);
 		parameters.put("idEstatus", EstatusEnum.CANCELADO.getIdEstatus());
 
 		getNamedJdbcTemplate().update(sql,parameters);

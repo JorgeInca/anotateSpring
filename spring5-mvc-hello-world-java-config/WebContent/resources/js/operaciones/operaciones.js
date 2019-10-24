@@ -578,7 +578,8 @@ var OperacionesJS = {
 		  $("#descripcion").val("");
 		  $("#precioUnitario").val("");
 		  $("#total").val("");
-		  $("#fechaCreacion").val("");
+		  setFechaFormato('fechaCreacion');
+		  
 		  
   },
     

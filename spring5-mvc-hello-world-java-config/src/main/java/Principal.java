@@ -15,7 +15,8 @@ public class Principal {
 
 	   System.out.println(hoy);
 	   
-	   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");  
+	   //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd")  ;
+	   DateFormat dateFormat = new SimpleDateFormat("MMMM dd,yyyy");
 	   String strDate = dateFormat.format(hoy);  
 	   
 	   System.out.println(strDate);

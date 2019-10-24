@@ -45,5 +45,25 @@ public class QuerysOperaciones{
 	public static final String UPDATE_EN_RENTA_INVENTARIO = "UPDATE INVENTARIO I SET "
 			+ " I.EN_RENTA = :enRenta "
 			+ "	WHERE 1 = 1 "; 
+	
+	public static final String GET_RENTAS = "SELECT I.* FROM RENTA I WHERE 1 = 1 ";
+	
+	public static final String GET_RENTAS_ESTATUS = " AND I.ESTATUS = :idEstatus ";
+	
+	public static final String ID_RENTA = " and I.RENTA_ID  = :idInventario ";
+	
+	public static final String INSERT_RENTA = " INSERT INTO RENTA (CANTIDAD,DESCRIPCION,PRECIO_UNITARIO,TOTAL) "
+			+ " VALUES (:cantidad,:descripcion,:precioUnitario,:total);"; 
+	
+	public static final String ACTUALIZA_RENTA = " UPDATE RENTA I SET "
+			+ " I.CANTIDAD = :cantidad, "
+			+ " I.DESCRIPCION = :descripcion, "
+			+ " I.PRECIO_UNITARIO = :precioUnitario, "
+			+ " I.TOTAL = :total "		
+			+ "	WHERE 1 = 1 "; 
+	
+	public static final String BAJA_RENTA = "UPDATE RENTA I SET "
+			+ " I.ESTATUS = :idEstatus "
+			+ "	WHERE 1 = 1 "; 
 
 }
