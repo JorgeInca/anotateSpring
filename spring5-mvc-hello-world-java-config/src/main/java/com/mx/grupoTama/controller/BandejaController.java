@@ -67,7 +67,7 @@ public class BandejaController {
 							respuesta.setModelo( operacionesService.getObras() );
 						}else{
 							if( tipoBandeja == TipoBandejaEnum.BANDEJA_OP_RENTAS.getIdBandeja() ){
-								//respuesta.setModelo( revolventesService.getRevolventes(null) );
+								respuesta.setModelo( operacionesService.getRentas() );
 							}
 							else{
 								if( tipoBandeja == TipoBandejaEnum.BANDEJA_OP_INVENTARIOS.getIdBandeja() ){

@@ -44,7 +44,7 @@
 			<h4> ${nombreBandeja} : </h4>
 		</div>
 		<div class="col col-md-2 offset-md-3" >
-			<button type="button" class="btn btn-warning" onclick="ObrasJS.nuevoRentas()">
+			<button type="button" class="btn btn-warning" onclick="ObrasJS.nuevoRenta()">
 				<span style="color: white;">
 					<i class="fas fa-plus"></i>Nuevo
 				</span>
@@ -63,14 +63,16 @@
 					cellspacing="0" width="100%">
 					<thead>
 						<tr>
-							<th>FECHA</th>
-							<th>DESCRIPCION</th>
-							<th>TIPO</th>
-							<!-- <th>MONTO:</th>							
-							<th>OBRA</th>
+							<th width="5%">#</th>
+							<th width="30%"> EMPLEADO</th>
+							<th width="25%">DESCRIPCION</th>
+							<th width="10%">FECHA INICIO:</th>	
+							<th width="10%">FECHA FINAL:</th>	
+							<th width="10%">ESTATUS:</th>												
+							<!-- <th>OBRA</th>
 							<th>CLIENTE</th>-->
-							<th>Editar:</th>
-							<th>Borrar:</th> 
+							<th width="5%">Editar:</th>
+							<th width="5%">Borrar:</th> 
 						</tr>
 					</thead>
 					<tbody>
@@ -92,16 +94,23 @@
   <script src="${pageContext.request.contextPath}/resources/js/general.js"></script>  
   <script src="${pageContext.request.contextPath}/resources/js/bandejas/bandejaGeneral.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/obras/obras.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/obras/manejoListadoInventario.js"></script>
   
   <script type="text/javascript">
   tablaGlobal = $('#tableRentas').DataTable({
 		columns : [
 		{
-			mData : "fecha"
+			mData : "idRenta"
+		}, {
+			mData : "idEmpleado"
 		}, {
 			mData : "descripcion"
-		}, {
-			mData : "tipo"
+		},{
+			mData : "fechaInicio"
+		},{
+			mData : "fechaFin"
+		},{
+			mData : "estatus"
 		}, { 
 			mData: "editar" 
 		}, { 

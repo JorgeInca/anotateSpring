@@ -8,9 +8,18 @@ public class Renta{
 	public Long idEmpleado;
 	public String descripcion;
 	public Date fechaAlta;
+	public Date fechaInicio;
 	public Date fechaFin;
 	public Float valor;
+	public Integer estatus;
 	
+	
+	public Integer getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(Integer estatus) {
+		this.estatus = estatus;
+	}
 	public Long getIdRenta() {
 		return idRenta;
 	}
@@ -48,11 +57,20 @@ public class Renta{
 		this.valor = valor;
 	}
 	
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
 	@Override
 	public String toString() {
 		return "Renta [idRenta=" + idRenta + ", idEmpleado=" + idEmpleado
 				+ ", descripcion=" + descripcion + ", fechaAlta=" + fechaAlta
-				+ ", fechaFin=" + fechaFin + ", valor=" + valor + "]";
-	}	
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin
+				+ ", valor=" + valor + ", estatus=" + estatus + "]";
+	}
+	
+	
 	
 }

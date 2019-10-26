@@ -207,7 +207,24 @@ var BandejaGeneralJS = {
 			};
 		}
 		if (tipoBandejaVar == TipoBandejaEnum.BANDEJA_OP_RENTAS.idTipoBandeja) {
-
+			obj = {
+					idRenta : modelo.idRenta,
+					idEmpleado : modelo.idEmpleado,
+					descripcion : modelo.descripcion,					
+					fechaAlta : modelo.fechaAlta,
+					fechaInicio : modelo.fechaInicio,
+					fechaFin : modelo.fechaFin != null ? modelo.fechaFin : 'x',
+					valor : modelo.valor,
+					estatus : modelo.estatus,
+					editar : '<button  id="btnActualizar" class="btn btn-primary btn-sm" onClick="javascript: ObrasJS.editaRenta('
+							+ modelo.idRenta
+							+ ');"><span style="color: white;"><i class="fas fa-edit"></i></span></button>',
+					borrar : '<button  class="btn btn-danger btn-sm" onClick="javascript: ObrasJS.validaEliminarRenta('
+							+ modelo.idRenta
+							+ ',\''
+							+ modelo.descripcion
+							+ '\');"><span style="color: white;"><i class="fas fa-trash"></i></span></button>'
+				};
 		}
 		if (tipoBandejaVar == TipoBandejaEnum.BANDEJA_OP_INVENTARIOS.idTipoBandeja) {
 			obj = {

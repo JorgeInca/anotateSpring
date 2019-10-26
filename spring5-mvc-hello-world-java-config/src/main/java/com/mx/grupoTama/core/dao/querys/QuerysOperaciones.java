@@ -46,14 +46,14 @@ public class QuerysOperaciones{
 			+ " I.EN_RENTA = :enRenta "
 			+ "	WHERE 1 = 1 "; 
 	
-	public static final String GET_RENTAS = "SELECT I.* FROM RENTA I WHERE 1 = 1 ";
+	public static final String GET_RENTAS = "SELECT R.* FROM RENTA R WHERE 1 = 1 ";
 	
-	public static final String GET_RENTAS_ESTATUS = " AND I.ESTATUS = :idEstatus ";
+	public static final String GET_RENTAS_ESTATUS = " AND R.ESTATUS = :idEstatus ";
 	
 	public static final String ID_RENTA = " and I.RENTA_ID  = :idInventario ";
 	
-	public static final String INSERT_RENTA = " INSERT INTO RENTA (CANTIDAD,DESCRIPCION,PRECIO_UNITARIO,TOTAL) "
-			+ " VALUES (:cantidad,:descripcion,:precioUnitario,:total);"; 
+	public static final String INSERT_RENTA = " INSERT INTO RENTA (EMPLEADO_ID,DESCRIPCION,FECHA_INICIO,FECHA_FINAL) "
+			+ " VALUES (:empleadoId,:descripcion,:fechaInicio,:fechaFinal);"; 
 	
 	public static final String ACTUALIZA_RENTA = " UPDATE RENTA I SET "
 			+ " I.CANTIDAD = :cantidad, "

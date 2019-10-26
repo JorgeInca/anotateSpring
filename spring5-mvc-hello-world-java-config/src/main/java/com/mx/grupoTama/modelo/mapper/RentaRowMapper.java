@@ -13,13 +13,14 @@ public class RentaRowMapper implements RowMapper<Renta> {
 	public Renta mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		Renta renta = new Renta();
-//		renta.setIdRenta(rs.getLong("INVENTARIO_ID"));
-//		renta.setCantidad(rs.getInt("CANTIDAD"));
-//		renta.setDescripcion(rs.getString("DESCRIPCION"));
-//		renta.setEnRenta(rs.getLong("EN_RENTA"));
-//		renta.setPrecioUnitario(rs.getFloat("PRECIO_UNITARIO"));
-//		renta.setTotal(rs.getFloat("TOTAL"));
-//		renta.setFechaAlta(rs.getDate("FECHA_ALTA"));
+		renta.setIdRenta(rs.getLong("RENTA_ID"));
+		renta.setIdEmpleado(rs.getLong("EMPLEADO_ID"));
+		renta.setDescripcion(rs.getString("DESCRIPCION"));
+		renta.setFechaAlta(rs.getDate("FECHA_ALTA"));
+		renta.setFechaInicio(rs.getDate("FECHA_INICIO"));
+		renta.setFechaFin(rs.getDate("FECHA_FINAL"));
+		renta.setEstatus(rs.getInt("ESTATUS"));
+
 		
 	    return renta;
 	}	
